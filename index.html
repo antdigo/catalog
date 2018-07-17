@@ -36,7 +36,6 @@
             padding: 0 0 75%;
             margin: auto;
             background: none 50% 50%/cover no-repeat;
-            /*mix-blend-mode: multiply;*/
         }
 
         .product-card__content {
@@ -207,10 +206,11 @@
       rgb = rgba2rgb(rgb[0], rgb[1], rgb[2], 0.15);
 
       iCtx.drawImage(image, 0, 0, imageCanvas.width, imageCanvas.height);
-      iCtx.globalCompositeOperation = 'multiply';
-      iCtx.fillStyle = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
-      iCtx.fillRect(0, 0, imageCanvas.width, imageCanvas.height);
-      el.style.backgroundImage = 'url(' + imageCanvas.toDataURL('image/jpeg', 0.8) + ')';
+      // iCtx.globalCompositeOperation = 'multiply';
+      // iCtx.fillStyle = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
+      // iCtx.fillRect(0, 0, imageCanvas.width, imageCanvas.height);
+      // el.style.backgroundImage = 'url(' + imageCanvas.toDataURL('image/jpeg', 0.8) + ')';
+      el.style.backgroundImage = 'url(' + svgToBase64Image(imageCanvas.toDataURL('image/jpeg', 0.8), '#' + ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1)) + ')';
       el.parentNode.style.backgroundColor = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
       iCtx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
       aCtx.clearRect(0, 0, averageColorCanvas.width, averageColorCanvas.height);
@@ -220,10 +220,14 @@
 
   function rgba2rgb(red, green, blue, alpha) {
     return [
-      (1 - alpha) * 255 + alpha * red,
-      (1 - alpha) * 255 + alpha * green,
-      (1 - alpha) * 255 + alpha * blue,
+      Math.max(Math.min(Math.round((1 - alpha) * 255 + alpha * red), 255), 0),
+      Math.max(Math.min(Math.round((1 - alpha) * 255 + alpha * green), 255), 0),
+      Math.max(Math.min(Math.round((1 - alpha) * 255 + alpha * blue), 255), 0)
     ];
+  }
+
+  function svgToBase64Image(image, color) {
+    return 'data:image/svg+xml;base64,' + window.btoa('<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 150"><defs><filter id="multiply"><feImage x="0" y="0" width="100%" height="100%" result="svg_bg" xlink:href="' + image + '"></feImage><feBlend mode="multiply" in="SourceGraphic" in2="svg_bg"></feBlend></filter><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><rect x="0" y="0" width="100" height="100" fill="' + color + '"/></pattern></defs><g filter="url(#multiply)"><rect x="0" y="0" width="200" height="150" fill="url(#p)"></rect></g></svg>');
   }
 </script>
 </body>
