@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <style>
+        .back {
+            background: #fff !important
+        }
+
+        .product-card {
+            border-radius: 4px !important;
+            box-shadow: 0 1px 7px rgba(0, 0, 0, .05);
+            border: 1px solid rgba(0, 0, 0, .06) !important;
+            background: #fff !important;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.33333;
+
+            display: flex;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .product-card__image {
+            box-sizing: border-box;
+            max-width: 120px;
+            padding: 15px 15px;
+            display: flex;
+            flex: 1 1;
+        }
+
+        .product-card__image-bg {
+            width: 100%;
+            padding: 0 0 75%;
+            margin: auto;
+            background: none 50% 50%/cover no-repeat;
+            /*mix-blend-mode: multiply;*/
+        }
+
+        .product-card__content {
+            display: flex;
+            flex: 1 1;
+        }
+
+        .product-card__content-container {
+            margin: auto 0;
+            padding: 10px 15px
+        }
+
+        .product-card__title {
+            color: #8c9a9c;
+            font-size: 14px;
+        }
+
+        .product-card__type {
+            color: #b0c6ca;
+            font-size: 12px;
+            font-weight: 300;
+            margin: 0.41666667em 0 0.33333333em;
+        }
+
+        .product-card__price {
+            color: #6a7679;
+            font-size: 18px;
+            position: relative;
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: .85em;
+        }
+
+        .product-card__price:after {
+            content: '\20bd';
+            position: absolute;
+            right: 0;
+            text-indent: 0;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+</head>
+<body class="back" style="padding:15px 15px;margin:0;">
+
+<div class="product-card">
+    <div class="product-card__image">
+        <div class="product-card__image-bg" data-image="img/200x150_ffffff_100_0_2018060411154310800_0.jpg"></div>
+
+    </div>
+    <div class="product-card__content">
+        <div class="product-card__content-container">
+            <div class="product-card__title">Белфаст Velvet Yellow</div>
+            <div class="product-card__type">Диван</div>
+            <div class="product-card__price">28 990</div>
+        </div>
+    </div>
+</div>
+
+<div class="product-card">
+    <div class="product-card__image">
+        <div class="product-card__image-bg" data-image="img/200x150_ffffff_100_0_2016072915590210800_0.jpg"></div>
+
+    </div>
+    <div class="product-card__content">
+        <div class="product-card__content-container">
+            <div class="product-card__title">Лени Velvet Light</div>
+            <div class="product-card__type">Диван</div>
+            <div class="product-card__price">15 990</div>
+        </div>
+    </div>
+</div>
+
+<div class="product-card">
+    <div class="product-card__image">
+        <div class="product-card__image-bg" data-image="img/200x150_ffffff_100_0_2018062009295910800_0.jpg"></div>
+
+    </div>
+    <div class="product-card__content">
+        <div class="product-card__content-container">
+            <div class="product-card__title">Нордик Sherst Grafit</div>
+            <div class="product-card__type">Диван</div>
+            <div class="product-card__price">37 990</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="product-card">
+    <div class="product-card__image">
+        <div class="product-card__image-bg" data-image="img/200x150_ffffff_100_0_2018060409430010800_0.jpg"></div>
+
+    </div>
+    <div class="product-card__content">
+        <div class="product-card__content-container">
+            <div class="product-card__title">Тиволи Ocean</div>
+            <div class="product-card__type">Диван</div>
+            <div class="product-card__price">33 990</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="product-card">
+    <div class="product-card__image">
+        <div class="product-card__image-bg" data-image="img/200x150_ffffff_100_0_2016080917070310800_0.jpg"></div>
+
+    </div>
+    <div class="product-card__content">
+        <div class="product-card__content-container">
+            <div class="product-card__title">Порту Textile Grey</div>
+            <div class="product-card__type">Диван</div>
+            <div class="product-card__price">14 990</div>
+        </div>
+    </div>
+</div>
+
+<div class="product-card">
+    <div class="product-card__image">
+        <div class="product-card__image-bg" data-image="img/200x150_ffffff_100_0_2016051309412310800_0.jpg"></div>
+
+    </div>
+    <div class="product-card__content">
+        <div class="product-card__content-container">
+            <div class="product-card__title">Сан-Паулу Velvet Yellow</div>
+            <div class="product-card__type">Диван</div>
+            <div class="product-card__price">14 990</div>
+        </div>
+    </div>
+</div>
+
+<script src="color-thief.min.js"></script>
+<script>
+  var colorThief = new ColorThief();
+  var imageBGs = document.querySelectorAll('.product-card__image-bg');
+
+  Array.prototype.forEach.call(imageBGs, function(item) {
+    // var image = new Image();
+    //
+    // image.onload = function() {
+    //   // var rgb = getAverageRGB(image);
+    //   var rgb = colorThief.getColor(image);
+    //   item.parentNode.style.backgroundColor = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',.1)';
+    // };
+    getImage(item, item.getAttribute('data-image'));
+    // image.src = item.style.backgroundImage.replace(/^url\(['"]?(.+?)['"]?\)/, '$1');
+
+  });
+
+  var averageColorCanvas = document.createElement('canvas');
+  averageColorCanvas.height = averageColorCanvas.width = 1;
+
+  var imageCanvas = document.createElement('canvas');
+  imageCanvas.height = 150;
+  imageCanvas.width = 200;
+
+  var aCtx = averageColorCanvas.getContext && averageColorCanvas.getContext('2d');
+  var iCtx = imageCanvas.getContext && imageCanvas.getContext('2d');
+
+  function getImage(el, url) {
+    var image = new Image();
+
+    image.onload = function() {
+      aCtx.drawImage(image, 0, 0, 1, 1);
+
+      var data = aCtx.getImageData(0, 0, 1, 1);
+      var rgb = data.data;
+
+      rgb = rgba2rgb(rgb[0], rgb[1], rgb[2], 0.15);
+
+      iCtx.drawImage(image, 0, 0, imageCanvas.width, imageCanvas.height);
+      iCtx.globalCompositeOperation = 'multiply';
+      iCtx.fillStyle = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
+      iCtx.fillRect(0, 0, imageCanvas.width, imageCanvas.height);
+      el.style.backgroundImage = 'url(' + imageCanvas.toDataURL('image/jpeg', 0.8) + ')';
+      el.parentNode.style.backgroundColor = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
+      iCtx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
+      aCtx.clearRect(0, 0, averageColorCanvas.width, averageColorCanvas.height);
+    };
+    image.src = url;
+  }
+
+  function rgba2rgb(red, green, blue, alpha) {
+    return [
+      (1 - alpha) * 255 + alpha * red,
+      (1 - alpha) * 255 + alpha * green,
+      (1 - alpha) * 255 + alpha * blue,
+    ];
+  }
+</script>
+</body>
+</html>
