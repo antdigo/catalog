@@ -230,7 +230,7 @@
       // iCtx.fillStyle = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
       // iCtx.fillRect(0, 0, imageCanvas.width, imageCanvas.height);
       // el.style.backgroundImage = 'url(' + imageCanvas.toDataURL('image/jpeg', 0.8) + ')';
-      el.style.backgroundImage = 'url(' + svgToBase64Image(imageCanvas.toDataURL('image/jpeg', 0.8), '#' + ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1)) + ')';
+      el.style.backgroundImage = 'url("' + svgToBase64Image(imageCanvas.toDataURL('image/jpeg', 0.8), '#' + ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1)) + '")';
       el.parentNode.style.backgroundColor = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
       iCtx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
       aCtx.clearRect(0, 0, averageColorCanvas.width, averageColorCanvas.height);
