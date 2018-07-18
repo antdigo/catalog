@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
     <style>
+        @font-face {
+            font-family: 'icomoon';
+            src: url('rouble.ttf?h1sx58') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         .back {
             background: #fff !important
         }
@@ -98,13 +105,25 @@
         }
 
         .product-card__price:after {
-            content: '';
-            background: url("rouble.svg") 100% 50%/auto 18px no-repeat;
+            content: "\e900";
+            font-family: 'icomoon' !important;
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1.4;
+            font-size: 0.94444444em;
+
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+
             position: absolute;
             right: 0;
             width: .85em;
             height: 100%;
             text-indent: 0;
+            text-align: right;
         }
     </style>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
