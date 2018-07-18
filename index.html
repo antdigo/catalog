@@ -33,25 +33,31 @@
         .product-card__image {
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
-            max-width: 120px;
+            width: 120px;
             padding: 15px 15px;
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
             display: flex;
-            -webkit-box-flex: 1;
-            -webkit-flex: 1 1;
-            -ms-flex: 1 1;
-            flex: 1 1;
+            -webkit-box-flex: 0;
+            -webkit-flex: 0 0 120px;
+            -ms-flex: 0 0 120px;
+            flex: 0 0 120px;
+        }
+
+        .product-card__image svg {
+            display: block;
+            width: 100%;
+            height: 100%;
         }
 
         .product-card__image-bg {
             width: 100%;
-            padding: 0 0 75%;
+            /*padding: 0 0 75%;*/
             margin: auto;
-            background-size: cover;
-            background-position: 50% 50%;
-            background-repeat: no-repeat;
+            /*background-size: cover;*/
+            /*background-position: 50% 50%;*/
+            /*background-repeat: no-repeat;*/
         }
 
         .product-card__content {
@@ -188,33 +194,17 @@
     </div>
 </div>
 
-<script src="color-thief.min.js"></script>
 <script>
-  var colorThief = new ColorThief();
   var imageBGs = document.querySelectorAll('.product-card__image-bg');
-
-  Array.prototype.forEach.call(imageBGs, function(item) {
-    // var image = new Image();
-    //
-    // image.onload = function() {
-    //   // var rgb = getAverageRGB(image);
-    //   var rgb = colorThief.getColor(image);
-    //   item.parentNode.style.backgroundColor = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',.1)';
-    // };
-    getImage(item, item.getAttribute('data-image'));
-    // image.src = item.style.backgroundImage.replace(/^url\(['"]?(.+?)['"]?\)/, '$1');
-
-  });
 
   var averageColorCanvas = document.createElement('canvas');
   averageColorCanvas.height = averageColorCanvas.width = 1;
 
-  var imageCanvas = document.createElement('canvas');
-  imageCanvas.height = 150;
-  imageCanvas.width = 200;
-
   var aCtx = averageColorCanvas.getContext && averageColorCanvas.getContext('2d');
-  var iCtx = imageCanvas.getContext && imageCanvas.getContext('2d');
+
+  Array.prototype.forEach.call(imageBGs, function(item) {
+    getImage(item, item.getAttribute('data-image'));
+  });
 
   function getImage(el, url) {
     var image = new Image();
@@ -227,14 +217,8 @@
 
       rgb = rgba2rgb(rgb[0], rgb[1], rgb[2], 0.15);
 
-      iCtx.drawImage(image, 0, 0, imageCanvas.width, imageCanvas.height);
-      // iCtx.globalCompositeOperation = 'multiply';
-      // iCtx.fillStyle = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
-      // iCtx.fillRect(0, 0, imageCanvas.width, imageCanvas.height);
-      // el.style.backgroundImage = 'url(' + imageCanvas.toDataURL('image/jpeg', 0.8) + ')';
-      el.style.backgroundImage = 'url("' + svgToBase64Image(imageCanvas.toDataURL('image/jpeg', 0.8), '#' + ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1)) + '")';
       el.parentNode.style.backgroundColor = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
-      iCtx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
+      el.innerHTML = svg(url, '#' + ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1));
       aCtx.clearRect(0, 0, averageColorCanvas.width, averageColorCanvas.height);
     };
     image.src = url;
@@ -244,12 +228,12 @@
     return [
       Math.max(Math.min(Math.round((1 - alpha) * 255 + alpha * red), 255), 0),
       Math.max(Math.min(Math.round((1 - alpha) * 255 + alpha * green), 255), 0),
-      Math.max(Math.min(Math.round((1 - alpha) * 255 + alpha * blue), 255), 0)
+      Math.max(Math.min(Math.round((1 - alpha) * 255 + alpha * blue), 255), 0),
     ];
   }
 
-  function svgToBase64Image(image, color) {
-    return 'data:image/svg+xml;base64,' + window.btoa('<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 150"><defs><filter id="multiply"><feImage x="0" y="0" width="100%" height="100%" result="svg_bg" xlink:href="' + image + '"></feImage><feBlend mode="multiply" in="SourceGraphic" in2="svg_bg"></feBlend></filter><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><rect x="0" y="0" width="100" height="100" fill="' + color + '"/></pattern></defs><g filter="url(#multiply)"><rect x="0" y="0" width="200" height="150" fill="url(#p)"></rect></g></svg>');
+  function svg(image, color) {
+    return '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 150"><defs><filter id="' + color.substr(1) + '"><feFlood result="fill" x="0" y="0" width="100%" height="100%" flood-color="' + color + '" flood-opacity="1"/><feBlend mode="multiply" in="SourceGraphic" in2="fill"/></filter></defs><image xlink:href="' + image + '" x="0" y="0" width="100%" height="100%" style="filter:url(' + color + ');"/></svg>';
   }
 </script>
 </body>
