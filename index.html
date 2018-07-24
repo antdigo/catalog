@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <style>
         @font-face {
             font-family: 'icomoon';
@@ -134,11 +135,70 @@
             text-indent: 0;
             text-align: right;
         }
+
+        .category-slider {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1;
+            /*font-weight: 700;*/
+            /*text-transform: uppercase;*/
+            /*text-transform: lowercase;*/
+            color: #6a7679;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .category-slider:before,
+        .category-slider:after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            top: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .category-slider:before {
+            left: 0;
+            background: -webkit-linear-gradient(left, #fff, transparent); /*Safari 5.1-6*/
+            background: -o-linear-gradient(left, #fff, transparent); /*Opera 11.1-12*/
+            background: -moz-linear-gradient(left, #fff, transparent); /*Fx 3.6-15*/
+            background: linear-gradient(to right, #fff, transparent); /*Standard*/
+        }
+
+        .category-slider:after {
+            right: 0;
+
+            background: -webkit-linear-gradient(right, #fff, transparent); /*Safari 5.1-6*/
+            background: -o-linear-gradient(right, #fff, transparent); /*Opera 11.1-12*/
+            background: -moz-linear-gradient(right, #fff, transparent); /*Fx 3.6-15*/
+            background: linear-gradient(to left, #fff, transparent); /*Standard*/
+        }
+
+        .category-slider__item {
+            padding: 5px 10px;
+            white-space: nowrap;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
-<body class="back" style="padding:15px 15px;margin:0;">
-<div class="container">
+<body class="back" style="padding:0;margin:0;font-family: 'Roboto', sans-serif;">
+<div style="border-bottom:1px solid #d9d9d9;">
+    <div class="container">
+        <div style="text-transform:uppercase;font-size:12px;font-weight:400;padding:10px 5px 0px;margin:0;text-align:center;color:#b0c6ca;">Популярное&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i></div>
+        <div class="category-slider">
+            <div class="category-slider__item">Прямые диваны</div>
+            <div class="category-slider__item">Угловые диваны</div>
+            <div class="category-slider__item">Модульные диваны</div>
+            <div class="category-slider__item">Распродажа диванов</div>
+            <div class="category-slider__item">Кресла</div>
+            <div class="category-slider__item">Пуфы</div>
+            <div class="category-slider__item">Домашний текстиль</div>
+        </div>
+    </div>
+</div>
+<div class="container" style="padding:15px 15px;">
     <div class="product-card">
         <div class="product-card__image">
             <div class="product-card__image-bg" data-image="img/200x150_ffffff_100_0_2018060411154310800_0.jpg"></div>
@@ -338,7 +398,7 @@
         </div>
     </div>
 </div>
-
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 <script>
   var imageBGs = document.querySelectorAll('.product-card__image-bg');
 
@@ -380,6 +440,15 @@
   function svg(image, color) {
     return '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 150"><defs><filter id="' + color.substr(1) + '"><feFlood result="fill" x="0" y="0" width="100%" height="100%" flood-color="' + color + '" flood-opacity="1"/><feBlend mode="multiply" in="SourceGraphic" in2="fill"/></filter></defs><image xlink:href="' + image + '" x="0" y="0" width="100%" height="100%" style="filter:url(' + color + ');"/></svg>';
   }
+</script>
+<script>
+  var elem = document.querySelector('.category-slider');
+  var flkty = new Flickity(elem, {
+    // options
+    wrapAround: true,
+    pageDots: false,
+    prevNextButtons: false,
+  });
 </script>
 </body>
 </html>
